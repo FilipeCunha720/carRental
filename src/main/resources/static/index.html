@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Rental Cars</title>
+<link rel="stylesheet" href="/bootstrap.css" />
+<link rel="stylesheet" href="/bootstrap.min.css" />
+<link rel="stylesheet" href="/custom.css" />
+<script type="text/javascript" src="/angular.min.js"></script>
+<script type="text/javascript" src="/app/app.module.js"></script>
+<script type="text/javascript" src="/app/rentalCar.controller.js"></script>
+</head>
+<body ng-app="app" ng-controller="RentalCarController as controller">
+	<header>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand">Rental Cars</a>
+				</div>
+				<button class="btn btn-success" ng-click="controller.printVehiclesOrderByPrice()">Vehicles Order By Price</button>
+				<button class="btn btn-success" ng-click="controller.calculateSpecificationOfVehicles()">Specification Of Vehicles</button>
+				<button class="btn btn-success" ng-click="controller.calculateHighestRatedSupplier()">Highest Rated Supplier</button>
+				<button class="btn btn-success" ng-click="controller.calculateVehicleScore()">Vehicle Score</button>
+			</div>
+		</nav>
+	</header>
+
+	<div>
+		<div class="row">
+			<div class="col-lg-offset-2 col-lg-8">
+				<table ng-show="controller.isprintVehiclesOrderByPrice" class="table">
+					<tr>
+						<td class="tableTop"><b>Vehicle name</b></td>
+						<td class="tableTop"><b>Price</b></td>
+					</tr>
+					<tr ng-repeat="store in controller.stores">
+						<td valign="top"><b>{{store.name}}</b></td>
+						<td valign="top"><b>{{store.price}}</b></td>
+					</tr>
+				</table>
+				<table ng-show="controller.iscalculateSpecificationOfVehicles" class="table">
+					<tr>
+						<td class="tableTop"><b>Vehicle name</b></td>
+						<td class="tableTop"><b>Vehicle SIPP</b></td>
+					</tr>
+					<tr ng-repeat="store in controller.stores">
+						<td valign="top"><b>{{store.name}}</b></td>
+						<td valign="top"><b>{{store.decodedSIPP}}</b></td>
+					</tr>
+				</table>
+				<table ng-show="controller.iscalculateHighestRatedSupplier" class="table">
+					<tr>
+						<td class="tableTop"><b>Vehicle name</b></td>
+						<td class="tableTop"><b>Vehicle SIPP</b></td>
+						<td class="tableTop"><b>Vehicle Supplier</b></td>
+						<td class="tableTop"><b>Vehicle Rating</b></td>
+					</tr>
+					<tr ng-repeat="store in controller.stores">
+						<td valign="top"><b>{{store.name}}</b></td>
+						<td valign="top"><b>{{store.decodedSIPP}}</b></td>
+						<td valign="top"><b>{{store.supplier}}</b></td>
+						<td valign="top"><b>{{store.rating}}</b></td>
+					</tr>
+				</table>
+				<table ng-show="controller.iscalculateVehicleScore" class="table">
+					<tr>
+						<td class="tableTop"><b>Vehicle Name</b></td>
+						<td class="tableTop"><b>Vehicle Rating</b></td>
+						<td class="tableTop"><b>Vehicle Score</b></td>
+						<td class="tableTop"><b>Vehicle Score Sum</b></td>
+					</tr>
+					<tr ng-repeat="store in controller.stores">
+						<td valign="top"><b>{{store.name}}</b></td>
+						<td valign="top"><b>{{store.rating}}</b></td>
+						<td valign="top"><b>{{store.score}}</b></td>
+						<td valign="top"><b>{{store.sum}}</b></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
