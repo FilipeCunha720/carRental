@@ -14,46 +14,34 @@ public interface RentalCarBusiness {
 	 * 
 	 * @throws IOException
 	 */
-	public void obtainJsonFile() throws IOException;
+	void obtainJsonFile() throws IOException;
 
 	/**
 	 * This method will print a list of all the cars, in ascending price order
-	 * 
-	 * @param listVehicles
-	 *            List<Vehicle>
-	 * 
+	 *
 	 * @return List<Vehicle>
 	 */
-	public List<Vehicle> printVehiclesOrderByPrice();
+	 List<Vehicle> printVehiclesOrderByPrice();
 
 	/**
 	 * Calculate the specification of the vehicles based on their SIPP.
-	 * 
-	 * @param listVehicles
-	 *            List<Vehicle>
-	 * 
+	 *
 	 * @return List<Vehicle>
 	 */
-	public List<Vehicle> calculateSpecificationOfVehicles();
+	 List<Vehicle> calculateSpecificationOfVehicles();
 
 	/**
 	 * Print out the highest rated supplier per car type, descending order.
-	 * 
-	 * @param listVehicles
-	 *            List<Vehicle>
-	 * 
+	 *
 	 * @return List<Vehicle>
 	 */
-	public List<Vehicle> calculateHighestRatedSupplier();
+	 List<Vehicle> calculateHighestRatedSupplier();
 
 	/**
 	 * Give each vehicle a score based on the below breakdown, then combine this
 	 * score with the suppliers rating.
 	 * 
-	 * @param listVehicles
-	 *            List<Vehicle>
-	 * 
 	 * @return Map<String, String>
 	 */
-	public Map<String, String> calculateVehicleScore();
+	 Map<String, String> calculateVehicleScore();
 }

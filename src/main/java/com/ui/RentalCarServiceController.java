@@ -20,10 +20,7 @@ public class RentalCarServiceController {
 
 	/**
 	 * This method will print a list of all the cars, in ascending price order
-	 * 
-	 * @param listVehicles
-	 *            List<Vehicle>
-	 * 
+	 *
 	 * @return List<Vehicle>
 	 */
 	@RequestMapping(value = "/printVehiclesOrderByPrice", method = RequestMethod.GET)
@@ -33,10 +30,7 @@ public class RentalCarServiceController {
 
 	/**
 	 * Calculate the specification of the vehicles based on their SIPP.
-	 * 
-	 * @param listVehicles
-	 *            List<Vehicle>
-	 * 
+	 *
 	 * @return List<Vehicle>
 	 */
 	@RequestMapping(value = "/calculateSpecificationOfVehicles", method = RequestMethod.GET)
@@ -46,9 +40,6 @@ public class RentalCarServiceController {
 
 	/**
 	 * Print out the highest rated supplier per car type, descending order.
-	 * 
-	 * @param listVehicles
-	 *            List<Vehicle>
 	 * 
 	 * @return List<Vehicle>
 	 */
@@ -60,10 +51,7 @@ public class RentalCarServiceController {
 	/**
 	 * Give each vehicle a score based on the below breakdown, then combine this
 	 * score with the suppliers rating.
-	 * 
-	 * @param listVehicles
-	 *            List<Vehicle>
-	 * 
+	 *
 	 * @return Map<String, String>
 	 */
 	@RequestMapping(value = "/calculateVehicleScore", method = RequestMethod.GET)

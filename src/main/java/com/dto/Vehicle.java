@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class Vehicle {
 
-	private String SIPP;
+	private String sipp;
 	private String decodedSIPP;
 	private String name;
 	private BigDecimal price;

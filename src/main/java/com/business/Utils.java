@@ -6,7 +6,9 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Utils {
 
     public String buildStringJson(Reader rd) throws IOException {
@@ -20,49 +22,49 @@ public class Utils {
 
     public List<Vehicle> obtainInfoFromTheJson(String jsonText) throws IOException {
 
-        jsonText = jsonText.substring(jsonText.indexOf("[") + 1, jsonText.indexOf("]"));
+        jsonText = jsonText.substring(jsonText.indexOf('[') + 1, jsonText.indexOf(']'));
 
-        List<Vehicle> listVehicles = new ArrayList<Vehicle>();
+        List<Vehicle> listVehicles = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
         String vehicle = null;
 
         while (jsonText.length() > 10) {
-            vehicle = jsonText.substring(jsonText.indexOf("{"), jsonText.indexOf("}") + 1);
+            vehicle = jsonText.substring(jsonText.indexOf('{'), jsonText.indexOf('}') + 1);
             listVehicles.add(mapper.readValue(vehicle, Vehicle.class));
-            jsonText = jsonText.substring(jsonText.indexOf("}") + 3);
+            jsonText = jsonText.substring(jsonText.indexOf('}') + 3);
 
         }
 
         return listVehicles;
     }
 
-    public String decodeSIPP(String SIPP) {
+    public String decodeSIPP(String sipp) {
 
-        String type = getCarType(SIPP.charAt(0));
+        String type = getCarType(sipp.charAt(0));
 
-        String subtype_doors = getCarSubType(SIPP.charAt(1));
+        String subTypeDoors = getCarSubType(sipp.charAt(1));
 
-        if (subtype_doors == null) {
-            subtype_doors = getNumberOfDoors(SIPP.charAt(1));
+        if (subTypeDoors == null) {
+            subTypeDoors = getNumberOfDoors(sipp.charAt(1));
         }
 
         String transmission = null;
 
-        if (SIPP.charAt(2) == 'M') {
+        if (sipp.charAt(2) == 'M') {
             transmission = " - Manual";
         } else {
             transmission = " - Automatic";
         }
 
-        String AC = null;
+        String ac = null;
 
-        if (SIPP.charAt(3) == 'N') {
-            AC = " - Petrol - no AC";
+        if (sipp.charAt(3) == 'N') {
+            ac = " - Petrol - no AC";
         } else {
-            AC = " - Petrol - AC";
+            ac = " - Petrol - AC";
         }
 
-        return type + subtype_doors + transmission + AC;
+        return type + subTypeDoors + transmission + ac;
 
     }
 
@@ -84,6 +86,8 @@ public class Utils {
                 return "Premium";
             case 'L':
                 return "Luxury";
+            default:
+                break;
         }
         return null;
     }
@@ -102,6 +106,8 @@ public class Utils {
                 return " Passenger Van";
             case 'X':
                 return " Special";
+            default:
+                break;
         }
         return null;
     }
@@ -114,22 +120,25 @@ public class Utils {
                 return " - 4 doors";
             case 'D':
                 return " - 5 doors";
+            default:
+                break;
         }
         return null;
     }
 
-    public Integer calculateScore(String SIPP) {
+    public Integer calculateScore(String sipp) {
 
         Integer score = 0;
 
-        if (SIPP.charAt(2) == 'M') {
+        if (sipp.charAt(2) == 'M') {
             score++;
-        } else {
+        }
+        else if (sipp.charAt(3) == 'R') {
+            score += 2;
+        }else {
             score += 5;
         }
-        if (SIPP.charAt(3) == 'R') {
-            score += 2;
-        }
+
         return score;
     }
 

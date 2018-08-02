@@ -12,15 +12,18 @@ import com.dto.Vehicle;
 @Service
 public class RentalCarService {
 
-	@Autowired
+
 	private RentalCarBusiness storeBusiness;
+
+	@Autowired
+	public RentalCarService(RentalCarBusiness storeBusiness){
+		this.storeBusiness=storeBusiness;
+
+	}
 
 	/**
 	 * This method will print a list of all the cars, in ascending price order
-	 * 
-	 * @param listVehicles
-	 *            List<Vehicle>
-	 * 
+	 *
 	 * @return List<Vehicle>
 	 */
 	public List<Vehicle> printVehiclesOrderByPrice() {
@@ -29,10 +32,7 @@ public class RentalCarService {
 
 	/**
 	 * Calculate the specification of the vehicles based on their SIPP.
-	 * 
-	 * @param listVehicles
-	 *            List<Vehicle>
-	 * 
+	 *
 	 * @return List<Vehicle>
 	 */
 	public List<Vehicle> calculateSpecificationOfVehicles() {
@@ -41,10 +41,7 @@ public class RentalCarService {
 
 	/**
 	 * Print out the highest rated supplier per car type, descending order.
-	 * 
-	 * @param listVehicles
-	 *            List<Vehicle>
-	 * 
+	 *
 	 * @return List<Vehicle>
 	 */
 	public List<Vehicle> calculateHighestRatedSupplier() {
@@ -54,10 +51,7 @@ public class RentalCarService {
 	/**
 	 * Give each vehicle a score based on the below breakdown, then combine this
 	 * score with the suppliers rating.
-	 * 
-	 * @param listVehicles
-	 *            List<Vehicle>
-	 * 
+	 *
 	 * @return Map<String, String>
 	 */
 	public Map<String, String> calculateVehicleScore() {
