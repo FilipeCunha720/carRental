@@ -54,7 +54,7 @@ public class RentalCarService {
 	 *
 	 * @return Map<String, String>
 	 */
-	public Map<String, String> calculateVehicleScore() {
+	public Map<String, Integer> calculateVehicleScore() {
 		return storeBusiness.calculateVehicleScore();
 	}
 

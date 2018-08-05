@@ -55,7 +55,7 @@ public class RentalCarServiceController {
 	 * @return Map<String, String>
 	 */
 	@RequestMapping(value = "/calculateVehicleScore", method = RequestMethod.GET)
-	public Map<String, String> calculateVehicleScore() {
+	public Map<String, Integer> calculateVehicleScore() {
 		return rentalCarService.calculateVehicleScore();
 	}
 

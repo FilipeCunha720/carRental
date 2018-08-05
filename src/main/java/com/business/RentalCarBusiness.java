@@ -43,5 +43,5 @@ public interface RentalCarBusiness {
 	 * 
 	 * @return Map<String, String>
 	 */
-	 Map<String, String> calculateVehicleScore();
+	 Map<String, Integer> calculateVehicleScore();
 }

@@ -1,6 +1,7 @@
 package com.business;
 
 import static java.util.Comparator.comparing;
+import static java.util.Map.Entry.comparingByValue;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toCollection;
 
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,11 +38,14 @@ public class RentalCarBusinessImpl implements RentalCarBusiness {
 
 	@Override
 	public void obtainJsonFile() throws IOException {
-		try (InputStream is = new URL("http://www.rentalcars.com/js/vehicles.json").openStream()) {
-			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-			String jsonText = utils.buildStringJson(rd);
-			listVehicles = utils.obtainInfoFromTheJson(jsonText);
-		}
+		final URLConnection connection = new URL("http://www.rentalcars.com/js/vehicles.json").openConnection();
+		connection.setConnectTimeout(500);
+		connection.setReadTimeout(500);
+		InputStream is = connection.getInputStream();
+		BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+		String jsonText = utils.buildStringJson(rd);
+		listVehicles = utils.obtainInfoFromTheJson(jsonText);
+
 	}
 
 	@Override
@@ -73,7 +78,7 @@ public class RentalCarBusinessImpl implements RentalCarBusiness {
 	}
 
 	@Override
-	public Map<String, String> calculateVehicleScore() {
+	public Map<String, Integer> calculateVehicleScore() {
 		Map<String, Integer> totalScores = new HashMap<>();
 
 		// set a score to each vehicle and add the total cost for each supplier
@@ -87,17 +92,17 @@ public class RentalCarBusinessImpl implements RentalCarBusiness {
 
 		});
 
-		Map<String, String> finalTable = new HashMap<>();
+		Map<String, Integer> finalTable = new HashMap<>();
 
 		// add to a HashMap the info of the vehicle and the sum of the total
 		// score for it's supplier
 		listVehicles.forEach(vehicle -> finalTable.put(
-				vehicle.getName() + " - " + vehicle.getScore() + " - " + vehicle.getRating() + " - ",
-				String.valueOf(totalScores.get(vehicle.getSupplier()))));
+				vehicle.getName().concat(" - ").concat(String.valueOf(vehicle.getScore())).concat(" - ").concat(String.valueOf(vehicle.getRating())).concat(" - "),
+				totalScores.get(vehicle.getSupplier())));
 
-		// print the result ordered by the sum of the scores in descending order
+		// print the result ordered by the sum of the scores in ascending order
 		return finalTable.entrySet().stream()
-				.sorted(Map.Entry.<String, String>comparingByValue().reversed())
+				.sorted(comparingByValue())
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
 	}
