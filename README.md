@@ -50,8 +50,6 @@ JSON file is accessible via <http://www.rentalcars.com/js/vehicles.json>
 
 <!-- -->
 
-31. {Vehicle name} -- {Price}
-
 -   Using the table below, calculate the specification of the vehicles
     based on their SIPP. Print the specification out using the following
     format:
@@ -65,9 +63,6 @@ JSON file is accessible via <http://www.rentalcars.com/js/vehicles.json>
     ...
 
 <!-- -->
-
-31. {Vehicle name} -- {SIPP} -- {Car type} -- {Car type/doors} --
-    {Transmission} -- {Fuel} -- {Air con}
 
 |1st letter (car type) |  2nd letter (doors/car type)  |3rd letter (transmission)  |4th letter (Fuel/Air Con)  |                               
 |:--------------------:|:-----------------------------:|:-------------------------:|:-------------------------:|
@@ -97,10 +92,7 @@ FVAR -- Full size passenger van, automatic, petrol, air conditioning
 
     ...
 
-
 <!-- -->
-
-7.  {Vehicle name} -- {Car type} -- {Supplier} -- {Rating}
 
 -   Give each vehicle a score based on the below breakdown, then combine
     this score with the suppliers rating. Print out a list of vehicles,
@@ -114,10 +106,7 @@ FVAR -- Full size passenger van, automatic, petrol, air conditioning
     scores}
 
     ...
-
-
-3.  {Vehicle name} -- {Vehicle score} -- {Supplier rating} -- {Sum of
-    scores}
+    
 
 > <ins>Breakdown</ins>
 >
